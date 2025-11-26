@@ -1,16 +1,12 @@
 FROM ghcr.io/astral-sh/uv:python3.13-alpine
 ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 
-
 WORKDIR /app
 COPY app.py app.py
 COPY deploy deploy
+COPY pyproject-ui-deploy.toml pyproject.toml
 
-RUN uv add \
-    onnxruntime \
-    torch>=2.9.0 \
-    transformers[torch]>=4.57.1 \
-    streamlit>=1.51.0
+RUN uv sync --locked --no-dev
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
