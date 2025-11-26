@@ -5,9 +5,6 @@ ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 WORKDIR /app
 COPY app.py app.py
 COPY deploy deploy
-COPY .python-version .python-version
-COPY pyproject.toml pyproject.toml
-COPY uv.lock uv.lock 
 
 RUN uv add \
     onnxruntime \
