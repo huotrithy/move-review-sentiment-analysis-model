@@ -6,7 +6,11 @@ COPY app.py app.py
 COPY deploy deploy
 COPY pyproject-ui-deploy.toml pyproject.toml
 
-RUN uv sync --locked --no-dev
+RUN uv add \
+    onnxruntime \
+    torch>=2.9.0 \
+    transformers[torch]>=4.57.1 \
+    streamlit>=1.51.0
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
